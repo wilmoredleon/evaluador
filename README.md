@@ -1,170 +1,108 @@
 # Evaluador de Perfiles Judiciales
 
-Este proyecto es un sistema automatizado para evaluar perfiles de candidatos judiciales, analizando su experiencia, formación académica y otros criterios relevantes.
+**Sistema de evaluación automatizada de candidatos judiciales.**
 
-## Requisitos del Sistema
+Este proyecto permite analizar perfiles de candidatos a cargos en el Poder Judicial mediante un sistema automatizado que evalúa criterios como experiencia, formación académica y desempeño profesional, clasificando a los candidatos como **Apto**, **Observado** o **No Apto**.
+
+---
+
+## 🧠 ¿Qué hace esta herramienta?
+
+El **Evaluador de Perfiles Judiciales** permite:
+
+- Analizar automáticamente perfiles de candidatos.
+- Evaluar con base en múltiples criterios como experiencia judicial, formación docente, investigación, calidad de redacción, etc.
+- Generar informes detallados y exportables.
+- Clasificar a los candidatos con criterios objetivos y transparentes.
+
+---
+
+## 🛠 Instrucciones de uso
+
+### Paso 1: Obtener los datos
+1. Visita [candidaturaspoderjudicial.ine.mx](https://candidaturaspoderjudicial.ine.mx/)
+2. Navega a la sección de candidatos judiciales.
+3. Descarga las listas perfiles en xlsx.
+4. Asegúrate de que el archivo Excel contiene los campos requeridos.
+
+Tu archivo debe contener al menos las siguientes columnas:
+
+- `Poder` (Ej. Judicial, Electoral)
+- `Nombre del candidato`
+- `URL del PDF del perfil`
+
+### Paso 2: Procesar los datos
+1. Coloca el archivo Excel y los PDFs descargados en la carpeta `data/raw/`.
+2. Ejecuta el siguiente comando desde la raíz del proyecto:
+
+   ```bash
+   python evaluador_ine.py
+   ```
+
+3. Los resultados se generarán automáticamente en la carpeta `output/resultados/`.
+
+---
+
+## ⚙️ Instalación técnica
+
+### Requisitos
 
 - Python 3.8 o superior
 - pip (gestor de paquetes de Python)
-- Conexión a internet para descargar los PDFs de los candidatos
 
-## Instalación
+### Configuración del entorno
 
-1. Clonar el repositorio:
-```bash
-git clone https://github.com/tu-usuario/evaluador_ine.git
-cd evaluador_ine
-```
+1. Clona el repositorio:
 
-2. Crear un entorno virtual (recomendado):
-```bash
-python -m venv venv
-# En Windows:
-venv\Scripts\activate
-# En Linux/Mac:
-source venv/bin/activate
-```
+   ```bash
+   git clone https://github.com/tu_usuario/evaluador-perfiles-judiciales.git
+   cd evaluador-perfiles-judiciales
+   ```
 
-3. Instalar las dependencias:
-```bash
-pip install -r requirements.txt
-```
+2. (Opcional pero recomendado) Crea un entorno virtual:
 
-## Estructura del Proyecto
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # En Windows: venv\Scripts\activate
+   ```
 
-```
-evaluador_ine/
-├── src/
-│   ├── evaluador.py      # Lógica principal de evaluación
-│   ├── config.py         # Configuración y constantes
-│   ├── nlp_analyzer.py   # Análisis de texto y NLP
-│   └── utils.py          # Utilidades generales
-├── input/                # Archivos Excel de entrada
-├── output/
-│   ├── pdfs/            # PDFs descargados de los candidatos
-│   ├── resultados/      # Resultados de la evaluación
-│   └── logs/            # Registros de ejecución
-└── requirements.txt      # Dependencias del proyecto
-```
+3. Instala las dependencias:
 
-## Uso
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-1. Preparar los archivos de entrada:
-   - Colocar los archivos Excel con los datos de los candidatos en la carpeta `input/`
-   - El Excel debe tener las columnas: "Poder", "Nombre" y "URL" (del PDF)
+---
 
-2. Ejecutar el evaluador:
-```bash
-python -m src.evaluador
-```
+## ⚠️ Advertencias importantes
 
-3. Los resultados se guardarán en:
-   - `output/resultados/resultados.xlsx`: Archivo Excel con múltiples hojas, una por cada sección evaluada
-   - `output/logs/evaluador.log`: Registro detallado de la ejecución
+> Esta herramienta es un prototipo de uso personal, creada con fines informativos y educativos.
+> **NO** debe ser usada como única fuente de evaluación para decisiones institucionales o legales.
 
-## Criterios de Evaluación
+- Los resultados son generados automáticamente mediante **criterios programados por el desarrollador**.
+- No garantiza exactitud ni exhaustividad en los datos o puntuaciones presentadas.
+- El análisis realizado **no es oficial** ni tiene validez jurídica.
+- Se recomienda encarecidamente realizar una **evaluación personal**, crítica y complementaria de los perfiles.
+- **El uso de esta herramienta es bajo tu propia responsabilidad.**
 
-### Clasificación de Candidatos
+> Al utilizar este sistema, aceptas que los resultados presentados son únicamente de carácter informativo y no constituyen una evaluación definitiva ni autorizada.
 
-1. **Apto**
-   - Doctorado
-   - ≥ 8 años de experiencia judicial
-   - 0 palabras de riesgo
+---
 
-2. **Observado**
-   - Maestría o Doctorado
-   - ≥ 5 años de experiencia judicial
-   - 0 palabras de riesgo
+## 📦 Tecnologías utilizadas
 
-3. **No Apto**
-   - No cumple con los criterios anteriores
+- **Python**
 
-### Sistema de Puntuación
+---
 
-El sistema asigna puntos en las siguientes categorías:
+## 📄 Licencia
 
-- **Experiencia Judicial** (máx. 30 puntos)
-  - 3.0 puntos por cada mención relevante
+Este proyecto es de código abierto y se ofrece bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
 
-- **Experiencia Docente** (máx. 20 puntos)
-  - 2.0 puntos por cada mención relevante
+---
 
-- **Experiencia en Investigación** (máx. 15 puntos)
-  - 1.5 puntos por cada mención relevante
+## 🤝 Contribuciones
 
-- **Experiencia Administrativa** (máx. 10 puntos)
-  - 1.0 punto por cada mención relevante
+Si deseas colaborar, mejorar el sistema o sugerir mejoras en los criterios de evaluación, ¡son bienvenidas las contribuciones!
 
-- **Años de Experiencia** (máx. 20 puntos)
-  - 2.0 puntos por año (máx. 10 años)
-
-- **Formación Académica**
-  - Doctorado: 20 puntos
-  - Maestría: 15 puntos
-  - Licenciatura: 10 puntos
-  - Especialidad: 5 puntos
-
-- **Instituciones de Formación** (máx. 10 puntos)
-  - 2 puntos por institución
-
-- **Palabras Positivas** (máx. 15 puntos)
-  - 1.5 puntos por palabra positiva
-
-- **Palabras de Riesgo** (penalización)
-  - -2.0 puntos por palabra de riesgo
-
-- **Calidad del Texto** (máx. 20 puntos)
-  - Basado en longitud, complejidad y coherencia
-
-## Interpretación de Resultados
-
-El archivo Excel de resultados contiene las siguientes columnas:
-
-- **Poder**: Poder judicial al que pertenece el candidato
-- **Nombre**: Nombre del candidato
-- **URL**: Enlace al PDF del candidato
-- **Puntaje Total**: Puntaje final (0-100)
-- **Aptitud**: Clasificación final (Apto/Observado/No Apto)
-- **Puntaje Judicial**: Puntos por experiencia judicial
-- **Puntaje Docente**: Puntos por experiencia docente
-- **Puntaje Investigación**: Puntos por experiencia en investigación
-- **Puntaje Administrativa**: Puntos por experiencia administrativa
-- **Puntaje Años**: Puntos por años de experiencia
-- **Puntaje Formación**: Puntos por nivel de formación
-- **Puntaje Instituciones**: Puntos por instituciones de formación
-- **Puntaje Positivas**: Puntos por palabras positivas
-- **Puntaje Riesgos**: Penalización por palabras de riesgo
-- **Puntaje Calidad**: Puntos por calidad del texto
-- **Conteo Palabras Riesgo**: Número de palabras de riesgo encontradas
-- **Conteo Palabras Positivas**: Número de palabras positivas encontradas
-- **Redes Sociales**: Indica si se detectaron redes sociales en el perfil
-
-## Solución de Problemas
-
-1. **Error al descargar PDFs**
-   - Verificar la conexión a internet
-   - Comprobar que las URLs en el Excel sean válidas
-   - Revisar los permisos de escritura en la carpeta output/pdfs
-
-2. **Error al procesar archivos Excel**
-   - Asegurar que los archivos Excel tengan el formato correcto
-   - Verificar que las columnas requeridas estén presentes
-   - Comprobar que no haya caracteres especiales en los nombres
-
-3. **Error al guardar resultados**
-   - Verificar que el archivo Excel de resultados no esté abierto
-   - Comprobar los permisos de escritura en la carpeta output/resultados
-
-## Contribuir
-
-Las contribuciones son bienvenidas. Por favor, sigue estos pasos:
-
-1. Haz un fork del repositorio
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Haz commit de tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles. 
+---
